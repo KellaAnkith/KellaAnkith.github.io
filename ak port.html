@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kella Ankith — CSE Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #f2d4dd;
+    --sky: #d6eaf6;
+    --cream: #faf8f5;
+    --dark: #1a1a1a;
+    --mid: #555;
+    --tag-bg: #f0f0f0;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(250,248,245,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--dark); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--mid); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
+  .hero-left { background: var(--sky); display: flex; flex-direction: column; justify-content: center; padding: 5rem 4rem 5rem 5rem; }
+  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); margin-bottom: 1.5rem; font-weight: 500; }
+  .hero-left h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 4vw, 3.8rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .hero-left h1 em { font-style: italic; color: #5b8fb9; }
+  .hero-desc { font-size: 1rem; color: var(--mid); line-height: 1.7; max-width: 360px; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary { background: var(--dark); color: #fff; padding: 0.85rem 1.8rem; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: opacity 0.2s; display: inline-block; }
+  .btn-primary:hover { opacity: 0.75; }
+  .btn-outline { background: transparent; color: var(--dark); padding: 0.85rem 1.8rem; border: 1.5px solid var(--dark); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; }
+  .btn-outline:hover { background: var(--dark); color: #fff; }
+
+  .hero-right { background: var(--pink); display: flex; align-items: center; justify-content: center; }
+  .hero-avatar-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 3rem; }
+  .avatar-circle { width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center; font-size: 5rem; border: 3px dashed rgba(0,0,0,0.15); }
+  .avatar-hint { font-size: 0.8rem; color: var(--mid); text-align: center; max-width: 200px; }
+  .hero-tags { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 2rem; }
+  .htag { background: rgba(255,255,255,0.7); border: 1px solid rgba(0,0,0,0.1); padding: 0.3rem 0.8rem; font-size: 0.75rem; font-weight: 500; color: var(--mid); border-radius: 2px; }
+
+  /* SHARED */
+  section { padding: 6rem 5rem; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.8rem; font-weight: 500; }
+  h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.1; }
+  .section-divider { width: 40px; height: 2px; background: var(--dark); margin-bottom: 3rem; }
+
+  /* ABOUT */
+  #about { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-text p { color: var(--mid); line-height: 1.8; font-size: 1rem; margin-bottom: 1rem; }
+  .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .fact-card { background: var(--sky); padding: 1.5rem; border-left: 3px solid var(--dark); }
+  .fact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid); margin-bottom: 0.3rem; }
+  .fact-value { font-weight: 600; font-size: 0.95rem; color: var(--dark); }
+
+  /* SKILLS */
+  #skills { background: var(--dark); color: #fff; }
+  #skills .section-label { color: rgba(255,255,255,0.5); }
+  #skills h2 { color: #fff; }
+  #skills .section-divider { background: rgba(255,255,255,0.3); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .skill-group h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; padding-bottom: 0.7rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); padding: 0.35rem 0.8rem; font-size: 0.8rem; border-radius: 2px; transition: background 0.2s; }
+  .skill-tag:hover { background: rgba(255,255,255,0.16); }
+
+  /* PROJECTS */
+  #projects { background: var(--pink); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .project-card { background: #fff; padding: 2rem; position: relative; transition: transform 0.25s, box-shadow 0.25s; border: 1px solid rgba(0,0,0,0.06); }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .project-num { font-family: 'DM Serif Display', serif; font-size: 3rem; color: rgba(0,0,0,0.07); position: absolute; top: 1rem; right: 1.5rem; line-height: 1; }
+  .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; line-height: 1.2; padding-right: 2.5rem; }
+  .project-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.6; margin-bottom: 1.2rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .stack-tag { background: var(--tag-bg); padding: 0.25rem 0.65rem; font-size: 0.73rem; font-weight: 500; border-radius: 2px; color: var(--mid); }
+  .project-links { display: flex; gap: 1rem; }
+  .project-links a { font-size: 0.8rem; font-weight: 500; color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--dark); padding-bottom: 1px; transition: opacity 0.2s; }
+  .project-links a:hover { opacity: 0.5; }
+
+  /* EDUCATION & ACHIEVEMENTS */
+  #experience { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .exp-item { display: grid; grid-template-columns: 90px 1fr; gap: 1.5rem; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+  .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .exp-year { font-size: 0.75rem; color: var(--mid); font-weight: 500; padding-top: 0.25rem; }
+  .exp-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .exp-content .exp-role { font-size: 0.85rem; color: var(--mid); margin-bottom: 0.6rem; }
+  .exp-content p { font-size: 0.85rem; color: var(--mid); line-height: 1.6; }
+
+  /* CERTS */
+  #certs { background: var(--sky); }
+  .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .cert-card { background: #fff; padding: 2rem; border: 1px solid rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 0.4rem; }
+  .cert-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+  .cert-platform { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: #5b8fb9; font-weight: 700; }
+  .cert-name { font-weight: 700; font-size: 1rem; line-height: 1.3; color: var(--dark); }
+  .cert-year { font-size: 0.78rem; color: var(--mid); margin-bottom: 0.6rem; }
+  .cert-link { display: inline-block; margin-top: auto; font-size: 0.78rem; font-weight: 600; color: var(--dark); text-decoration: none; border-bottom: 1.5px solid var(--dark); padding-bottom: 1px; transition: opacity 0.2s; width: fit-content; }
+  .cert-link:hover { opacity: 0.5; }
+
+  /* CONTACT */
+  #contact { background: var(--dark); color: #fff; text-align: center; }
+  #contact .section-label { color: rgba(255,255,255,0.5); }
+  #contact h2 { color: #fff; }
+  #contact .section-divider { margin: 1.5rem auto; background: rgba(255,255,255,0.3); }
+  .contact-tagline { color: rgba(255,255,255,0.6); font-size: 1rem; margin-bottom: 3.5rem; font-style: italic; }
+  .contact-links { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .contact-link { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-decoration: none; color: #fff; transition: opacity 0.2s; }
+  .contact-link:hover { opacity: 0.6; }
+  .contact-link .cl-icon { font-size: 1.6rem; }
+  .contact-link .cl-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); }
+  .contact-link .cl-value { font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; }
+  .footer-note { font-size: 0.75rem; color: rgba(255,255,255,0.25); margin-top: 4rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 2rem; }
+    .hero-right { min-height: 300px; }
+    section { padding: 4rem 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    #experience { grid-template-columns: 1fr; gap: 3rem; }
+    .certs-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-left > * { animation: fadeUp 0.6s ease both; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-left h1  { animation-delay: 0.2s; }
+  .hero-desc     { animation-delay: 0.3s; }
+  .hero-btns     { animation-delay: 0.4s; }
+  .hero-tags     { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">&lt; KellaAnkith /&gt;</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Education</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">CSE Student &nbsp;·&nbsp; ML & Data Science &nbsp;·&nbsp; Problem Solver</p>
+    <h1>Hey there, I am<br><em>Kella Ankith</em><br>Developer &amp;<br>ML Enthusiast.</h1>
+    <p class="hero-desc">
+      I build intelligent systems — from fraud detection models to interactive dashboards.
+      Pursuing B.Tech in CSE at LPU and passionate about turning data into decisions.
+    </p>
+    <div class="hero-btns">
+  <a href="#projects" class="btn-primary">View My Work</a>
+  <a href="#contact" class="btn-outline">Get In Touch →</a>
+  <a href="Ankith_CV_2026.pdf" download="Kella_Ankith_CV.pdf" class="btn-outline">Download CV ↓</a>
+</div>
+    <div class="hero-tags">
+      <span class="htag">#MachineLearning</span>
+      <span class="htag">#DataScience</span>
+      <span class="htag">#Python</span>
+      <span class="htag">#OpenSource</span>
+    </div>
+  </div>
+  <div class="hero-right">
+  <div class="hero-avatar-placeholder">
+    <img src="akpic.jpg" alt="Kella Ankith"
+      style="width:220px; height:220px; border-radius:50%; object-fit:cover; border:3px solid rgba(0,0,0,0.1);object-position: center 30%;">
+  </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <p class="section-label">01 — About Me</p>
+    <h2>Who Am I?</h2>
+    <div class="section-divider"></div>
+    <p>
+      I'm a Computer Science student at Lovely Professional University with a strong foundation in
+      machine learning, data analysis, and software development. I love building projects that solve
+      real-world problems — from detecting credit card fraud to visualizing public health trends.
+    </p>
+    <p>
+      Outside academics, I actively sharpen my problem-solving skills on LeetCode and TUF,
+      and I'm always exploring new tools and frameworks to add to my arsenal.
+    </p>
+    <p style="margin-top:1.5rem;">
+      <strong>Career Goal:</strong> To grow as an ML / Data Science engineer, building impactful, data-driven products at scale.
+    </p>
+  </div>
+  <div class="about-facts">
+    <div class="fact-card">
+      <div class="fact-label">University</div>
+      <div class="fact-value">Lovely Professional University</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Branch / Year</div>
+      <div class="fact-value">B.Tech CSE · Aug 2023 – Present</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">CGPA</div>
+      <div class="fact-value">7.23 / 10</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label">Location</div>
+      <div class="fact-value">Punjab, India</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">02 — Skills</p>
+  <h2>Tech Stack</h2>
+  <div class="section-divider"></div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>💻 Languages</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C / C++</span>
+        <span class="skill-tag">Kotlin</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>⚙️ Frameworks & Libraries</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">Keras</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>🛠️ Tools & Platforms</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Jupyter Notebook</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Excel</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>🧠 Core CS & Soft Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">DSA</span>
+        <span class="skill-tag">OOP</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Time Management</span>
+        <span class="skill-tag">Adaptability</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">03 — Projects</p>
+  <h2>Selected Work ⭐</h2>
+  <div class="section-divider"></div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <span class="project-num">01</span>
+      <h3>Credit Card Fraud Detection</h3>
+      <p>ML model to detect fraudulent transactions using supervised learning. Handled severe class imbalance with SMOTE &amp; undersampling. Compared Logistic Regression, Random Forest and more using Precision, Recall, F1 &amp; ROC-AUC.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Scikit-learn</span>
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">NumPy</span>
+        <span class="stack-tag">Matplotlib</span>
+        <span class="stack-tag">Seaborn</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/KellaAnkith" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-num">02</span>
+      <h3>US Chronic Disease Indicator</h3>
+      <p>Interactive Power BI dashboard analyzing chronic disease indicators (diabetes, heart disease, obesity, cancer) across US states. Used DAX measures, KPI cards, maps and trend charts for public health insights.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">DAX</span>
+        <span class="stack-tag">Power Query</span>
+        <span class="stack-tag">Excel</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/KellaAnkith" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-num">03</span>
+      <h3>Email Spam Classifier</h3>
+      <p>Spam classification system using TF-IDF vectorization. Compared Naive Bayes and Logistic Regression, tuned hyperparameters, and minimized false positives/negatives using confusion matrix analysis.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Scikit-learn</span>
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">Matplotlib</span>
+        <span class="stack-tag">Seaborn</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/KellaAnkith" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION & ACHIEVEMENTS -->
+<section id="experience">
+
+  <div>
+    <p class="section-label">04 — Education</p>
+    <h2>Study</h2>
+    <div class="section-divider"></div>
+
+    <div class="exp-item">
+      <span class="exp-year">Aug 2023 – Present</span>
+      <div class="exp-content">
+        <h3>Lovely Professional University</h3>
+        <div class="exp-role">B.Tech — Computer Science &amp; Engineering · Punjab, India</div>
+        <p>CGPA: 7.23 &nbsp;·&nbsp; Relevant: DSA, OOP, DBMS, OS, Computer Networks</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <span class="exp-year">Apr 2021 – Mar 2023</span>
+      <div class="exp-content">
+        <h3>Sri Tejaswini Academy</h3>
+        <div class="exp-role">Intermediate (PCM) · Tadigadapa, Vijayawada</div>
+        <p>Percentage: 93%</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <span class="exp-year">Apr 2019 – Mar 2021</span>
+      <div class="exp-content">
+        <h3>Johnson Grammar School</h3>
+        <div class="exp-role">Matriculation · Nacharam, Hyderabad</div>
+        <p>Percentage: 75%</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">05 — Achievements</p>
+    <h2>Wins</h2>
+    <div class="section-divider"></div>
+
+    <div class="exp-item">
+      <span class="exp-year">Nov 2025</span>
+      <div class="exp-content">
+        <h3>90+ Problems Solved</h3>
+        <div class="exp-role">LeetCode &amp; TUF</div>
+        <p>Sharpened problem-solving skills across DSA challenges on competitive programming platforms.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <span class="exp-year">Nov 2025</span>
+      <div class="exp-content">
+        <h3>Top Badges Earned</h3>
+        <div class="exp-role">LeetCode &amp; HackerRank</div>
+        <p>Earned top-tier recognition badges on both competitive programming platforms.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certs">
+  <p class="section-label">06 — Certifications</p>
+  <h2>Badges &amp; Courses</h2>
+  <div class="section-divider"></div>
+  <div class="certs-grid">
+
+    <div class="cert-card">
+      <div class="cert-platform">Coursera</div>
+      <div class="cert-name">Machine Learning by Andrew Ng</div>
+      <div class="cert-year">Nov 2025 · Domain: ML / AI</div>
+      <a href="#" target="_blank" class="cert-link">View Certificate →</a>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-platform">NPTEL</div>
+      <div class="cert-name">Cloud Computing Certificate</div>
+      <div class="cert-year">Oct 2025 · Domain: Cloud</div>
+      <a href="#" target="_blank" class="cert-link">View Certificate →</a>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-platform">Udemy</div>
+      <div class="cert-name">Data Structures and Algorithms</div>
+      <div class="cert-year">Sep 2025 · Domain: CS Fundamentals</div>
+      <a href="#" target="_blank" class="cert-link">View Certificate →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">07 — Contact</p>
+  <h2>Let's Connect</h2>
+  <div class="section-divider"></div>
+  <p class="contact-tagline">Open to internships, collaborations, and good conversations.</p>
+
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:kellaankith@gmail.com">
+      <span class="cl-icon">📧</span>
+      <span class="cl-label">Email</span>
+      <span class="cl-value">kellaankith@gmail.com</span>
+    </a>
+    <a class="contact-link" href="https://github.com/KellaAnkith" target="_blank">
+      <span class="cl-icon">🐙</span>
+      <span class="cl-label">GitHub</span>
+      <span class="cl-value">github.com/KellaAnkith</span>
+    </a>
+    <a class="contact-link" href="https://linkedin.com/in/kellaankith" target="_blank">
+      <span class="cl-icon">💼</span>
+      <span class="cl-label">LinkedIn</span>
+      <span class="cl-value">linkedin.com/in/kellaankith</span>
+    </a>
+    <a class="contact-link" href="tel:+919392141465">
+      <span class="cl-icon">📱</span>
+      <span class="cl-label">Mobile</span>
+      <span class="cl-value">+91 93921 41465</span>
+    </a>
+  </div>
+
+  <a href="mailto:kellaankith@gmail.com" class="btn-primary">Send Me an Email →</a>
+  <p class="footer-note">Build it. Ship it. Get hired. 🚀 &nbsp;·&nbsp; Built by Kella Ankith · 2026</p>
+</section>
+
+<script>
+  // Smooth scroll — works for ALL anchor links including nav and buttons
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      var target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Fade-in on scroll
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.project-card, .cert-card, .exp-item, .fact-card, .skill-group').forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
